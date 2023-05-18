@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
-  const cash = useSelector(state => state.cash);
-  console.log(cash);
+  const cash = useSelector(state => state.cash.cash);
 
   const addCash = (cash) => {
     dispatch({type: "ADD_CASH", payload: cash})
@@ -22,7 +21,7 @@ function App() {
   return (
     <div >
       <div style={{display: "flex"}}>
-        <div style={{fontSize:"3rem"}}>{ cash}$</div>
+        <div style={{fontSize:"3rem"}}>{ cash} $ </div>
         <button onClick={() => addCash(Number(prompt()))} >ADD_CASH</button>
         <button onClick={() => getCash(Number(prompt()))}>GET_CASH</button>
       </div>
