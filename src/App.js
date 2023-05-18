@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomerAction } from "./store/customerReducers";
+import { fetchCustomers } from "./asyncAction/customers";
 
 
 
@@ -47,18 +48,21 @@ function App() {
       <div style={{marginBottom: 10 }}>
         <button style={{width:200, marginTop: 10}} onClick={() => addCustomer(prompt())}>ADD_CUSTOMER</button>
         <button style={{width:200, marginTop: 10}} onClick={() => removeCustomerB(prompt())}>REMOVE_CUSTOMER</button>
+        <button style={{width:200, marginTop: 10}} onClick={() => dispatch(fetchCustomers())}>GET CUSTOMER FROM DB</button>
       </div>
       {customers.length > 0 ?
         <div style={{display:'flex', flexFlow: 'column'}}>
           {customers.map(customer => 
             <div onClick={() => removeCustomer(customer)}
-              style={{
-                width: '40%', fontSize: "2rem", marginTop: '5px',
-                border: '1px solid black', margin: 'auto', marginBottom: 5
-              }} key={customer.id}>
+            style={{
+              width: '40%', fontSize: "2rem", marginTop: '5px',
+              border: '1px solid black', margin: 'auto', marginBottom: 5
+            }} key={customer.id}>
               {customer.name}
+              
             </div>
             )}
+            <hr />
         </div>
         :
         <div style={{fontSize:"2rem", marginTop: '10px'}}>
