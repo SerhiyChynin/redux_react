@@ -51,7 +51,7 @@ function App() {
         <button style={{width:200, marginTop: 10}} onClick={() => dispatch(fetchCustomers())}>GET CUSTOMER FROM DB</button>
       </div>
       {customers.length > 0 ?
-        <div style={{display:'flex', flexFlow: 'column'}}>
+        <div style={{display:'flex', flexFlow: 'column'}} key={customers.id}>
           {customers.map(customer => 
             <div onClick={() => removeCustomer(customer)}
             style={{
@@ -62,7 +62,6 @@ function App() {
               
             </div>
             )}
-            <hr />
         </div>
         :
         <div style={{fontSize:"2rem", marginTop: '10px'}}>
