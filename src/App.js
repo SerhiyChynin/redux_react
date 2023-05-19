@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomerAction } from "./store/customerReducers";
 import { fetchCustomers } from "./asyncAction/customers";
+import { incrementAction, decrementAction } from "./store/countReducer";
 
 
 
@@ -9,7 +10,10 @@ import { fetchCustomers } from "./asyncAction/customers";
 function App() {
   const dispatch = useDispatch();
   const cash = useSelector(state => state.cash.cash);
-  const customers = useSelector(state => state.customers.customers)
+  const customers = useSelector(state => state.customers.customers);
+  const count = useSelector(state => state.count.count);
+  console.log(count);
+  console.log(cash);
 
   const addCash = (cash) => {
     dispatch({type: "ADD_CASH", payload: cash})
@@ -32,6 +36,16 @@ function App() {
   const removeCustomerB = (customers) => {
     dispatch({ type: "REMOVE_CUSTOMERS_BTN",  payload: customers})
   }
+
+  const increment = () => {
+    dispatch(incrementAction(1))
+  }
+
+  const decrement = () => {
+    dispatch(decrementAction(1))
+  }
+
+  
 
 
   return (
@@ -67,7 +81,15 @@ function App() {
         <div style={{fontSize:"2rem", marginTop: '10px'}}>
           Клиенты отсутсвуют
         </div>
-        }
+      }
+      <hr />
+
+      <div style={{fontSize:"2rem"}}>{count}</div>
+      <div style={{display: "flex", justifyContent:'center', margin: 10}}>
+        <button onClick={()=> increment()} style={{margin: 5}}>INCREMENT ++</button>
+        <button onClick={()=> decrement()} style={{margin: 5}}>DECREMENT --</button>
+        <button style={{margin: 5}}>GET USERS </button>
+      </div>
     </div>
   );
 }

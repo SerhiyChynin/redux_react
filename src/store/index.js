@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { cashReducer } from './cashReducer';
 import { customerReducer } from './customerReducers';
+import { countReducer } from './countReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import  thunk  from 'redux-thunk'; 
 
@@ -8,6 +9,7 @@ const rootReducer = combineReducers({    //создали два отдельн�
 
     cash: cashReducer,
     customers: customerReducer,
+    count: countReducer,
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
