@@ -5,7 +5,7 @@ const initialState = {
 } 
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
-const GETUSERS = "GETUSERS";
+
 
 export const countReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -13,8 +13,7 @@ export const countReducer = (state = initialState, action) => {
             return {...state, count: state.count + action.payload};
         case DECREMENT:
             return {...state, count: state.count - action.payload};
-        case GETUSERS:
-            return {};
+     
         default:
             return state;
     }

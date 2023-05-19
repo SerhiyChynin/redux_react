@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCustomerAction } from "./store/customerReducers";
 import { fetchCustomers } from "./asyncAction/customers";
 import { incrementAction, decrementAction } from "./store/countReducer";
+import { userAction } from "./store/userReducer";
 
 
 
@@ -12,8 +13,8 @@ function App() {
   const cash = useSelector(state => state.cash.cash);
   const customers = useSelector(state => state.customers.customers);
   const count = useSelector(state => state.count.count);
-  console.log(count);
-  console.log(cash);
+  const users = useSelector(state => state.users.users)
+
 
   const addCash = (cash) => {
     dispatch({type: "ADD_CASH", payload: cash})
@@ -43,6 +44,13 @@ function App() {
 
   const decrement = () => {
     dispatch(decrementAction(1))
+  }
+
+  const getUsers = () => {
+    dispatch(userAction())
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(users => users)
   }
 
   
@@ -88,7 +96,7 @@ function App() {
       <div style={{display: "flex", justifyContent:'center', margin: 10}}>
         <button onClick={()=> increment()} style={{margin: 5}}>INCREMENT ++</button>
         <button onClick={()=> decrement()} style={{margin: 5}}>DECREMENT --</button>
-        <button style={{margin: 5}}>GET USERS </button>
+        <button onClick={()=> getUsers()} style={{margin: 5}}>GET USERS </button>
       </div>
     </div>
   );
