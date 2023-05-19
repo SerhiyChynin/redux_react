@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomerAction } from "./store/customerReducers";
 import { fetchCustomers } from "./asyncAction/customers";
-import { incrementAction, decrementAction } from "./store/countReducer";
+import { incrementAction, decrementAction, asyncIncrementAction } from "./store/countReducer";
 import { userAction } from "./store/userReducer";
 
 
@@ -38,12 +38,12 @@ function App() {
     dispatch({ type: "REMOVE_CUSTOMERS_BTN",  payload: customers})
   }
 
-  const increment = () => {
-    dispatch(incrementAction(1))
-  }
+  // const increment = () => {
+  //   dispatch(incrementAction())
+  // }
 
   const decrement = () => {
-    dispatch(decrementAction(1))
+    dispatch(decrementAction())
   }
 
   const getUsers = () => {
@@ -94,7 +94,7 @@ function App() {
 
       <div style={{fontSize:"2rem"}}>{count}</div>
       <div style={{display: "flex", justifyContent:'center', margin: 10}}>
-        <button onClick={()=> increment()} style={{margin: 5}}>INCREMENT ++</button>
+        <button onClick={()=> dispatch(asyncIncrementAction())} style={{margin: 5}}>INCREMENT ++</button>
         <button onClick={()=> decrement()} style={{margin: 5}}>DECREMENT --</button>
         <button onClick={()=> getUsers()} style={{margin: 5}}>GET USERS </button>
       </div>

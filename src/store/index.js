@@ -5,6 +5,10 @@ import { countReducer } from './countReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import  thunk  from 'redux-thunk'; 
 import { userReducer } from './userReducer';
+import createSagaMiddleware from 'redux-saga';
+import { countWatcher } from '../saga/countSaga';
+
+const sagaMiddleware = createSagaMiddleware(); 
 
 const rootReducer = combineReducers({    //создали два отдельных редюсера и создали один обьединяющий редюсер и передали его в стор и передали в провайдер
 
@@ -14,4 +18,7 @@ const rootReducer = combineReducers({    //создали два отдельн�
     users: userReducer
 })
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(countWatcher)
+// , composeWithDevTools(applyMiddleware(thunk))
