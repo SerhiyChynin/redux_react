@@ -7,6 +7,7 @@ import  thunk  from 'redux-thunk';
 import { userReducer } from './userReducer';
 import createSagaMiddleware from 'redux-saga';
 import { countWatcher } from '../saga/countSaga';
+import { rootWatcher } from '../saga/index';
 
 const sagaMiddleware = createSagaMiddleware(); 
 
@@ -20,5 +21,5 @@ const rootReducer = combineReducers({    //создали два отдельн�
 
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(countWatcher)
+sagaMiddleware.run(rootWatcher)
 // , composeWithDevTools(applyMiddleware(thunk))

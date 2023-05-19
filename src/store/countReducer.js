@@ -6,6 +6,7 @@ const initialState = {
 export const INCREMENT = "INCREMENT";
 export const ASYNC_INCREMENT = "ASYNC_INCREMENT";
 export const DECREMENT = "DECREMENT";
+export const ASYNC_DECREMENT = "ASYNC_DECREMENT";
 
 
 export const countReducer = (state = initialState, action) => {
@@ -24,3 +25,4 @@ export const countReducer = (state = initialState, action) => {
 export const incrementAction = (payload) => ({type: INCREMENT, payload}) //action функция которая возвращает обьект
 export const asyncIncrementAction = (payload) => ({type: ASYNC_INCREMENT, payload}) 
 export const decrementAction = (payload) => ({type: DECREMENT, payload}) 
+export const asyncDecrementAction = (payload) => ({type: ASYNC_DECREMENT, payload}) 

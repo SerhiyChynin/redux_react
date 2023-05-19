@@ -1,5 +1,5 @@
 import { put, takeEvery} from 'redux-saga/effects';
-import {ASYNC_INCREMENT, INCREMENT, DECREMENT, incrementAction } from '../store/countReducer';
+import {ASYNC_INCREMENT, ASYNC_DECREMENT, incrementAction, decrementAction } from '../store/countReducer';
 // import {}
 
 
@@ -11,9 +11,11 @@ function* incrementWorker() {
 }
 
 function* decrementWorker() {
-    
+    yield delay(1000)
+    yield put(decrementAction())
 }
 
 export function* countWatcher() {
     yield takeEvery(ASYNC_INCREMENT, incrementWorker ) //первый парам тип экшена за которым следить, вторым парам worker будет работать когда экшен с таким типом(1парам) будет задиспатчен
+    yield takeEvery(ASYNC_DECREMENT, decrementWorker ) //первый парам тип экшена за которым следить, вторым парам worker будет работать когда экшен с таким типом(1парам) будет задиспатчен
 }

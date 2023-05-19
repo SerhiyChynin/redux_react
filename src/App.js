@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomerAction } from "./store/customerReducers";
 import { fetchCustomers } from "./asyncAction/customers";
-import { incrementAction, decrementAction, asyncIncrementAction } from "./store/countReducer";
+import { incrementAction, decrementAction, asyncIncrementAction, asyncDecrementAction } from "./store/countReducer";
+import { asyncUserAction } from "./store/userReducer";
 import { userAction } from "./store/userReducer";
 
 
@@ -14,6 +15,7 @@ function App() {
   const customers = useSelector(state => state.customers.customers);
   const count = useSelector(state => state.count.count);
   const users = useSelector(state => state.users.users)
+  console.log(users);
 
 
   const addCash = (cash) => {
@@ -37,23 +39,6 @@ function App() {
   const removeCustomerB = (customers) => {
     dispatch({ type: "REMOVE_CUSTOMERS_BTN",  payload: customers})
   }
-
-  // const increment = () => {
-  //   dispatch(incrementAction())
-  // }
-
-  const decrement = () => {
-    dispatch(decrementAction())
-  }
-
-  const getUsers = () => {
-    dispatch(userAction())
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(users => users)
-  }
-
-  
 
 
   return (
@@ -95,8 +80,12 @@ function App() {
       <div style={{fontSize:"2rem"}}>{count}</div>
       <div style={{display: "flex", justifyContent:'center', margin: 10}}>
         <button onClick={()=> dispatch(asyncIncrementAction())} style={{margin: 5}}>INCREMENT ++</button>
-        <button onClick={()=> decrement()} style={{margin: 5}}>DECREMENT --</button>
-        <button onClick={()=> getUsers()} style={{margin: 5}}>GET USERS </button>
+        <button onClick={()=> dispatch(asyncDecrementAction())} style={{margin: 5}}>DECREMENT --</button>
+        <button onClick={()=> dispatch(asyncUserAction())} style={{margin: 5}}>GET USERS </button>
+      </div>
+      <div>
+        {users.map(user =>
+          <div>{user.name }</div>)}
       </div>
     </div>
   );

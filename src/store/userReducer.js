@@ -3,7 +3,8 @@
 const initialState = {
     users: []
 }
-const GET_USERS = "GET_USERS";
+export const GET_USERS = "GET_USERS";
+export const ASYNC_GET_USERS = "ASYNC_GET_USERS";
 
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -15,3 +16,4 @@ export const userReducer = (state = initialState, action) => {
 }
 
 export const userAction = (payload) => ({ type: GET_USERS, payload });
+export const asyncUserAction = () => ({ type: ASYNC_GET_USERS});
